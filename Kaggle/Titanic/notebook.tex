@@ -1,0 +1,1092 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{titanic}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:}      PassengerId  Survived  Pclass  \textbackslash{}
+         0              1         0       3   
+         1              2         1       1   
+         2              3         1       3   
+         3              4         1       1   
+         4              5         0       3   
+         5              6         0       3   
+         6              7         0       1   
+         7              8         0       3   
+         8              9         1       3   
+         9             10         1       2   
+         10            11         1       3   
+         11            12         1       1   
+         12            13         0       3   
+         13            14         0       3   
+         14            15         0       3   
+         15            16         1       2   
+         16            17         0       3   
+         17            18         1       2   
+         18            19         0       3   
+         19            20         1       3   
+         20            21         0       2   
+         21            22         1       2   
+         22            23         1       3   
+         23            24         1       1   
+         24            25         0       3   
+         25            26         1       3   
+         26            27         0       3   
+         27            28         0       1   
+         28            29         1       3   
+         29            30         0       3   
+         ..           {\ldots}       {\ldots}     {\ldots}   
+         861          862         0       2   
+         862          863         1       1   
+         863          864         0       3   
+         864          865         0       2   
+         865          866         1       2   
+         866          867         1       2   
+         867          868         0       1   
+         868          869         0       3   
+         869          870         1       3   
+         870          871         0       3   
+         871          872         1       1   
+         872          873         0       1   
+         873          874         0       3   
+         874          875         1       2   
+         875          876         1       3   
+         876          877         0       3   
+         877          878         0       3   
+         878          879         0       3   
+         879          880         1       1   
+         880          881         1       2   
+         881          882         0       3   
+         882          883         0       3   
+         883          884         0       2   
+         884          885         0       3   
+         885          886         0       3   
+         886          887         0       2   
+         887          888         1       1   
+         888          889         0       3   
+         889          890         1       1   
+         890          891         0       3   
+         
+                                                           Name     Sex   Age  SibSp  \textbackslash{}
+         0                              Braund, Mr. Owen Harris    male  22.0      1   
+         1    Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.0      1   
+         2                               Heikkinen, Miss. Laina  female  26.0      0   
+         3         Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+         4                             Allen, Mr. William Henry    male  35.0      0   
+         5                                     Moran, Mr. James    male   NaN      0   
+         6                              McCarthy, Mr. Timothy J    male  54.0      0   
+         7                       Palsson, Master. Gosta Leonard    male   2.0      3   
+         8    Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)  female  27.0      0   
+         9                  Nasser, Mrs. Nicholas (Adele Achem)  female  14.0      1   
+         10                     Sandstrom, Miss. Marguerite Rut  female   4.0      1   
+         11                            Bonnell, Miss. Elizabeth  female  58.0      0   
+         12                      Saundercock, Mr. William Henry    male  20.0      0   
+         13                         Andersson, Mr. Anders Johan    male  39.0      1   
+         14                Vestrom, Miss. Hulda Amanda Adolfina  female  14.0      0   
+         15                    Hewlett, Mrs. (Mary D Kingcome)   female  55.0      0   
+         16                                Rice, Master. Eugene    male   2.0      4   
+         17                        Williams, Mr. Charles Eugene    male   NaN      0   
+         18   Vander Planke, Mrs. Julius (Emelia Maria Vande{\ldots}  female  31.0      1   
+         19                             Masselmani, Mrs. Fatima  female   NaN      0   
+         20                                Fynney, Mr. Joseph J    male  35.0      0   
+         21                               Beesley, Mr. Lawrence    male  34.0      0   
+         22                         McGowan, Miss. Anna "Annie"  female  15.0      0   
+         23                        Sloper, Mr. William Thompson    male  28.0      0   
+         24                       Palsson, Miss. Torborg Danira  female   8.0      3   
+         25   Asplund, Mrs. Carl Oscar (Selma Augusta Emilia{\ldots}  female  38.0      1   
+         26                             Emir, Mr. Farred Chehab    male   NaN      0   
+         27                      Fortune, Mr. Charles Alexander    male  19.0      3   
+         28                       O'Dwyer, Miss. Ellen "Nellie"  female   NaN      0   
+         29                                 Todoroff, Mr. Lalio    male   NaN      0   
+         ..                                                 {\ldots}     {\ldots}   {\ldots}    {\ldots}   
+         861                        Giles, Mr. Frederick Edward    male  21.0      1   
+         862  Swift, Mrs. Frederick Joel (Margaret Welles Ba{\ldots}  female  48.0      0   
+         863                  Sage, Miss. Dorothy Edith "Dolly"  female   NaN      8   
+         864                             Gill, Mr. John William    male  24.0      0   
+         865                           Bystrom, Mrs. (Karolina)  female  42.0      0   
+         866                       Duran y More, Miss. Asuncion  female  27.0      1   
+         867               Roebling, Mr. Washington Augustus II    male  31.0      0   
+         868                        van Melkebeke, Mr. Philemon    male   NaN      0   
+         869                    Johnson, Master. Harold Theodor    male   4.0      1   
+         870                                  Balkic, Mr. Cerin    male  26.0      0   
+         871   Beckwith, Mrs. Richard Leonard (Sallie Monypeny)  female  47.0      1   
+         872                           Carlsson, Mr. Frans Olof    male  33.0      0   
+         873                        Vander Cruyssen, Mr. Victor    male  47.0      0   
+         874              Abelson, Mrs. Samuel (Hannah Wizosky)  female  28.0      1   
+         875                   Najib, Miss. Adele Kiamie "Jane"  female  15.0      0   
+         876                      Gustafsson, Mr. Alfred Ossian    male  20.0      0   
+         877                               Petroff, Mr. Nedelio    male  19.0      0   
+         878                                 Laleff, Mr. Kristo    male   NaN      0   
+         879      Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)  female  56.0      0   
+         880       Shelley, Mrs. William (Imanita Parrish Hall)  female  25.0      0   
+         881                                 Markun, Mr. Johann    male  33.0      0   
+         882                       Dahlberg, Miss. Gerda Ulrika  female  22.0      0   
+         883                      Banfield, Mr. Frederick James    male  28.0      0   
+         884                             Sutehall, Mr. Henry Jr    male  25.0      0   
+         885               Rice, Mrs. William (Margaret Norton)  female  39.0      0   
+         886                              Montvila, Rev. Juozas    male  27.0      0   
+         887                       Graham, Miss. Margaret Edith  female  19.0      0   
+         888           Johnston, Miss. Catherine Helen "Carrie"  female   NaN      1   
+         889                              Behr, Mr. Karl Howell    male  26.0      0   
+         890                                Dooley, Mr. Patrick    male  32.0      0   
+         
+              Parch            Ticket      Fare        Cabin Embarked  
+         0        0         A/5 21171    7.2500          NaN        S  
+         1        0          PC 17599   71.2833          C85        C  
+         2        0  STON/O2. 3101282    7.9250          NaN        S  
+         3        0            113803   53.1000         C123        S  
+         4        0            373450    8.0500          NaN        S  
+         5        0            330877    8.4583          NaN        Q  
+         6        0             17463   51.8625          E46        S  
+         7        1            349909   21.0750          NaN        S  
+         8        2            347742   11.1333          NaN        S  
+         9        0            237736   30.0708          NaN        C  
+         10       1           PP 9549   16.7000           G6        S  
+         11       0            113783   26.5500         C103        S  
+         12       0         A/5. 2151    8.0500          NaN        S  
+         13       5            347082   31.2750          NaN        S  
+         14       0            350406    7.8542          NaN        S  
+         15       0            248706   16.0000          NaN        S  
+         16       1            382652   29.1250          NaN        Q  
+         17       0            244373   13.0000          NaN        S  
+         18       0            345763   18.0000          NaN        S  
+         19       0              2649    7.2250          NaN        C  
+         20       0            239865   26.0000          NaN        S  
+         21       0            248698   13.0000          D56        S  
+         22       0            330923    8.0292          NaN        Q  
+         23       0            113788   35.5000           A6        S  
+         24       1            349909   21.0750          NaN        S  
+         25       5            347077   31.3875          NaN        S  
+         26       0              2631    7.2250          NaN        C  
+         27       2             19950  263.0000  C23 C25 C27        S  
+         28       0            330959    7.8792          NaN        Q  
+         29       0            349216    7.8958          NaN        S  
+         ..     {\ldots}               {\ldots}       {\ldots}          {\ldots}      {\ldots}  
+         861      0             28134   11.5000          NaN        S  
+         862      0             17466   25.9292          D17        S  
+         863      2          CA. 2343   69.5500          NaN        S  
+         864      0            233866   13.0000          NaN        S  
+         865      0            236852   13.0000          NaN        S  
+         866      0     SC/PARIS 2149   13.8583          NaN        C  
+         867      0          PC 17590   50.4958          A24        S  
+         868      0            345777    9.5000          NaN        S  
+         869      1            347742   11.1333          NaN        S  
+         870      0            349248    7.8958          NaN        S  
+         871      1             11751   52.5542          D35        S  
+         872      0               695    5.0000  B51 B53 B55        S  
+         873      0            345765    9.0000          NaN        S  
+         874      0         P/PP 3381   24.0000          NaN        C  
+         875      0              2667    7.2250          NaN        C  
+         876      0              7534    9.8458          NaN        S  
+         877      0            349212    7.8958          NaN        S  
+         878      0            349217    7.8958          NaN        S  
+         879      1             11767   83.1583          C50        C  
+         880      1            230433   26.0000          NaN        S  
+         881      0            349257    7.8958          NaN        S  
+         882      0              7552   10.5167          NaN        S  
+         883      0  C.A./SOTON 34068   10.5000          NaN        S  
+         884      0   SOTON/OQ 392076    7.0500          NaN        S  
+         885      5            382652   29.1250          NaN        Q  
+         886      0            211536   13.0000          NaN        S  
+         887      0            112053   30.0000          B42        S  
+         888      2        W./C. 6607   23.4500          NaN        S  
+         889      0            111369   30.0000         C148        C  
+         890      0            370376    7.7500          NaN        Q  
+         
+         [891 rows x 12 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}128}]:}        PassengerId    Survived      Pclass         Age       SibSp  \textbackslash{}
+          count   891.000000  891.000000  891.000000  714.000000  891.000000   
+          mean    446.000000    0.383838    2.308642   29.699118    0.523008   
+          std     257.353842    0.486592    0.836071   14.526497    1.102743   
+          min       1.000000    0.000000    1.000000    0.420000    0.000000   
+          25\%     223.500000    0.000000    2.000000   20.125000    0.000000   
+          50\%     446.000000    0.000000    3.000000   28.000000    0.000000   
+          75\%     668.500000    1.000000    3.000000   38.000000    1.000000   
+          max     891.000000    1.000000    3.000000   80.000000    8.000000   
+          
+                      Parch        Fare  
+          count  891.000000  891.000000  
+          mean     0.381594   32.204208  
+          std      0.806057   49.693429  
+          min      0.000000    0.000000  
+          25\%      0.000000    7.910400  
+          50\%      0.000000   14.454200  
+          75\%      0.000000   31.000000  
+          max      6.000000  512.329200  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{total} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{total}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} 891
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{total\PYZus{}males} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{total\PYZus{}females} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{total\PYZus{}males}\PY{o}{/}\PY{n}{total}\PY{p}{,} \PY{n}{total\PYZus{}females}\PY{o}{/}\PY{n}{total}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} (0.6475869809203143, 0.35241301907968575)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{survived} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         \PY{n}{survived}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:}              Survived  Pclass  \textbackslash{}
+         PassengerId                     
+         2                   1       1   
+         3                   1       3   
+         4                   1       1   
+         9                   1       3   
+         10                  1       2   
+         11                  1       3   
+         12                  1       1   
+         16                  1       2   
+         18                  1       2   
+         20                  1       3   
+         22                  1       2   
+         23                  1       3   
+         24                  1       1   
+         26                  1       3   
+         29                  1       3   
+         32                  1       1   
+         33                  1       3   
+         37                  1       3   
+         40                  1       3   
+         44                  1       2   
+         45                  1       3   
+         48                  1       3   
+         53                  1       1   
+         54                  1       2   
+         56                  1       1   
+         57                  1       2   
+         59                  1       2   
+         62                  1       1   
+         66                  1       3   
+         67                  1       2   
+         {\ldots}               {\ldots}     {\ldots}   
+         810                 1       1   
+         821                 1       1   
+         822                 1       3   
+         824                 1       3   
+         828                 1       2   
+         829                 1       3   
+         830                 1       1   
+         831                 1       3   
+         832                 1       2   
+         836                 1       1   
+         839                 1       3   
+         840                 1       1   
+         843                 1       1   
+         850                 1       1   
+         854                 1       1   
+         856                 1       3   
+         857                 1       1   
+         858                 1       1   
+         859                 1       3   
+         863                 1       1   
+         866                 1       2   
+         867                 1       2   
+         870                 1       3   
+         872                 1       1   
+         875                 1       2   
+         876                 1       3   
+         880                 1       1   
+         881                 1       2   
+         888                 1       1   
+         890                 1       1   
+         
+                                                                   Name     Sex    Age  \textbackslash{}
+         PassengerId                                                                     
+         2            Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.00   
+         3                                       Heikkinen, Miss. Laina  female  26.00   
+         4                 Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.00   
+         9            Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)  female  27.00   
+         10                         Nasser, Mrs. Nicholas (Adele Achem)  female  14.00   
+         11                             Sandstrom, Miss. Marguerite Rut  female   4.00   
+         12                                    Bonnell, Miss. Elizabeth  female  58.00   
+         16                            Hewlett, Mrs. (Mary D Kingcome)   female  55.00   
+         18                                Williams, Mr. Charles Eugene    male    NaN   
+         20                                     Masselmani, Mrs. Fatima  female    NaN   
+         22                                       Beesley, Mr. Lawrence    male  34.00   
+         23                                 McGowan, Miss. Anna "Annie"  female  15.00   
+         24                                Sloper, Mr. William Thompson    male  28.00   
+         26           Asplund, Mrs. Carl Oscar (Selma Augusta Emilia{\ldots}  female  38.00   
+         29                               O'Dwyer, Miss. Ellen "Nellie"  female    NaN   
+         32              Spencer, Mrs. William Augustus (Marie Eugenie)  female    NaN   
+         33                                    Glynn, Miss. Mary Agatha  female    NaN   
+         37                                            Mamee, Mr. Hanna    male    NaN   
+         40                                 Nicola-Yarred, Miss. Jamila  female  14.00   
+         44                    Laroche, Miss. Simonne Marie Anne Andree  female   3.00   
+         45                               Devaney, Miss. Margaret Delia  female  19.00   
+         48                                   O'Driscoll, Miss. Bridget  female    NaN   
+         53                    Harper, Mrs. Henry Sleeper (Myna Haxtun)  female  49.00   
+         54           Faunthorpe, Mrs. Lizzie (Elizabeth Anne Wilkin{\ldots}  female  29.00   
+         56                                           Woolner, Mr. Hugh    male    NaN   
+         57                                           Rugg, Miss. Emily  female  21.00   
+         59                                West, Miss. Constance Mirium  female   5.00   
+         62                                         Icard, Miss. Amelie  female  38.00   
+         66                                    Moubarek, Master. Gerios    male    NaN   
+         67                                Nye, Mrs. (Elizabeth Ramell)  female  29.00   
+         {\ldots}                                                        {\ldots}     {\ldots}    {\ldots}   
+         810             Chambers, Mrs. Norman Campbell (Bertha Griggs)  female  33.00   
+         821          Hays, Mrs. Charles Melville (Clara Jennings Gr{\ldots}  female  52.00   
+         822                                          Lulic, Mr. Nikola    male  27.00   
+         824                                         Moor, Mrs. (Beila)  female  27.00   
+         828                                      Mallet, Master. Andre    male   1.00   
+         829                               McCormack, Mr. Thomas Joseph    male    NaN   
+         830                  Stone, Mrs. George Nelson (Martha Evelyn)  female  62.00   
+         831                    Yasbeck, Mrs. Antoni (Selini Alexander)  female  15.00   
+         832                            Richards, Master. George Sibley    male   0.83   
+         836                                Compton, Miss. Sara Rebecca  female  39.00   
+         839                                            Chip, Mr. Chang    male  32.00   
+         840                                       Marechal, Mr. Pierre    male    NaN   
+         843                                    Serepeca, Miss. Augusta  female  30.00   
+         850               Goldenberg, Mrs. Samuel L (Edwiga Grabowska)  female    NaN   
+         854                                  Lines, Miss. Mary Conover  female  16.00   
+         856                                 Aks, Mrs. Sam (Leah Rosen)  female  18.00   
+         857                 Wick, Mrs. George Dennick (Mary Hitchcock)  female  45.00   
+         858                                     Daly, Mr. Peter Denis     male  51.00   
+         859                      Baclini, Mrs. Solomon (Latifa Qurban)  female  24.00   
+         863          Swift, Mrs. Frederick Joel (Margaret Welles Ba{\ldots}  female  48.00   
+         866                                   Bystrom, Mrs. (Karolina)  female  42.00   
+         867                               Duran y More, Miss. Asuncion  female  27.00   
+         870                            Johnson, Master. Harold Theodor    male   4.00   
+         872           Beckwith, Mrs. Richard Leonard (Sallie Monypeny)  female  47.00   
+         875                      Abelson, Mrs. Samuel (Hannah Wizosky)  female  28.00   
+         876                           Najib, Miss. Adele Kiamie "Jane"  female  15.00   
+         880              Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)  female  56.00   
+         881               Shelley, Mrs. William (Imanita Parrish Hall)  female  25.00   
+         888                               Graham, Miss. Margaret Edith  female  19.00   
+         890                                      Behr, Mr. Karl Howell    male  26.00   
+         
+                      SibSp  Parch            Ticket      Fare Cabin Embarked  
+         PassengerId                                                           
+         2                1      0          PC 17599   71.2833   C85        C  
+         3                0      0  STON/O2. 3101282    7.9250   NaN        S  
+         4                1      0            113803   53.1000  C123        S  
+         9                0      2            347742   11.1333   NaN        S  
+         10               1      0            237736   30.0708   NaN        C  
+         11               1      1           PP 9549   16.7000    G6        S  
+         12               0      0            113783   26.5500  C103        S  
+         16               0      0            248706   16.0000   NaN        S  
+         18               0      0            244373   13.0000   NaN        S  
+         20               0      0              2649    7.2250   NaN        C  
+         22               0      0            248698   13.0000   D56        S  
+         23               0      0            330923    8.0292   NaN        Q  
+         24               0      0            113788   35.5000    A6        S  
+         26               1      5            347077   31.3875   NaN        S  
+         29               0      0            330959    7.8792   NaN        Q  
+         32               1      0          PC 17569  146.5208   B78        C  
+         33               0      0            335677    7.7500   NaN        Q  
+         37               0      0              2677    7.2292   NaN        C  
+         40               1      0              2651   11.2417   NaN        C  
+         44               1      2     SC/Paris 2123   41.5792   NaN        C  
+         45               0      0            330958    7.8792   NaN        Q  
+         48               0      0             14311    7.7500   NaN        Q  
+         53               1      0          PC 17572   76.7292   D33        C  
+         54               1      0              2926   26.0000   NaN        S  
+         56               0      0             19947   35.5000   C52        S  
+         57               0      0        C.A. 31026   10.5000   NaN        S  
+         59               1      2        C.A. 34651   27.7500   NaN        S  
+         62               0      0            113572   80.0000   B28      NaN  
+         66               1      1              2661   15.2458   NaN        C  
+         67               0      0        C.A. 29395   10.5000   F33        S  
+         {\ldots}            {\ldots}    {\ldots}               {\ldots}       {\ldots}   {\ldots}      {\ldots}  
+         810              1      0            113806   53.1000    E8        S  
+         821              1      1             12749   93.5000   B69        S  
+         822              0      0            315098    8.6625   NaN        S  
+         824              0      1            392096   12.4750  E121        S  
+         828              0      2   S.C./PARIS 2079   37.0042   NaN        C  
+         829              0      0            367228    7.7500   NaN        Q  
+         830              0      0            113572   80.0000   B28      NaN  
+         831              1      0              2659   14.4542   NaN        C  
+         832              1      1             29106   18.7500   NaN        S  
+         836              1      1          PC 17756   83.1583   E49        C  
+         839              0      0              1601   56.4958   NaN        S  
+         840              0      0             11774   29.7000   C47        C  
+         843              0      0            113798   31.0000   NaN        C  
+         850              1      0             17453   89.1042   C92        C  
+         854              0      1          PC 17592   39.4000   D28        S  
+         856              0      1            392091    9.3500   NaN        S  
+         857              1      1             36928  164.8667   NaN        S  
+         858              0      0            113055   26.5500   E17        S  
+         859              0      3              2666   19.2583   NaN        C  
+         863              0      0             17466   25.9292   D17        S  
+         866              0      0            236852   13.0000   NaN        S  
+         867              1      0     SC/PARIS 2149   13.8583   NaN        C  
+         870              1      1            347742   11.1333   NaN        S  
+         872              1      1             11751   52.5542   D35        S  
+         875              1      0         P/PP 3381   24.0000   NaN        C  
+         876              0      0              2667    7.2250   NaN        C  
+         880              0      1             11767   83.1583   C50        C  
+         881              0      1            230433   26.0000   NaN        S  
+         888              0      0            112053   30.0000   B42        S  
+         890              0      0            111369   30.0000  C148        C  
+         
+         [342 rows x 11 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{survived}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{surv} \PY{o}{=} \PY{n}{survived}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{} fraction of people survived}
+         \PY{n}{surv} \PY{o}{/} \PY{n}{total}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} 0.3838383838383838
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{surv\PYZus{}males} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{survived}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{surv\PYZus{}females} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{survived}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{surv\PYZus{}males}\PY{o}{/}\PY{n}{surv}\PY{p}{,} \PY{n}{surv\PYZus{}females}\PY{o}{/}\PY{n}{surv}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} (0.31871345029239767, 0.6812865497076024)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{p}{[}\PY{n}{total\PYZus{}males}\PY{p}{,} \PY{n}{total\PYZus{}females}\PY{p}{]}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total males}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total females}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{p}{[}\PY{n}{surv\PYZus{}males}\PY{p}{,} \PY{n}{surv\PYZus{}females}\PY{p}{]}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{survived males}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{survived females}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{autopct}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{filtered} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}not}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+          \PY{n}{filtered}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:}      PassengerId  Survived  Pclass  \textbackslash{}
+          0              1         0       3   
+          1              2         1       1   
+          2              3         1       3   
+          3              4         1       1   
+          4              5         0       3   
+          6              7         0       1   
+          7              8         0       3   
+          8              9         1       3   
+          9             10         1       2   
+          10            11         1       3   
+          11            12         1       1   
+          12            13         0       3   
+          13            14         0       3   
+          14            15         0       3   
+          15            16         1       2   
+          16            17         0       3   
+          18            19         0       3   
+          20            21         0       2   
+          21            22         1       2   
+          22            23         1       3   
+          23            24         1       1   
+          24            25         0       3   
+          25            26         1       3   
+          27            28         0       1   
+          30            31         0       1   
+          33            34         0       2   
+          34            35         0       1   
+          35            36         0       1   
+          37            38         0       3   
+          38            39         0       3   
+          ..           {\ldots}       {\ldots}     {\ldots}   
+          856          857         1       1   
+          857          858         1       1   
+          858          859         1       3   
+          860          861         0       3   
+          861          862         0       2   
+          862          863         1       1   
+          864          865         0       2   
+          865          866         1       2   
+          866          867         1       2   
+          867          868         0       1   
+          869          870         1       3   
+          870          871         0       3   
+          871          872         1       1   
+          872          873         0       1   
+          873          874         0       3   
+          874          875         1       2   
+          875          876         1       3   
+          876          877         0       3   
+          877          878         0       3   
+          879          880         1       1   
+          880          881         1       2   
+          881          882         0       3   
+          882          883         0       3   
+          883          884         0       2   
+          884          885         0       3   
+          885          886         0       3   
+          886          887         0       2   
+          887          888         1       1   
+          889          890         1       1   
+          890          891         0       3   
+          
+                                                            Name     Sex   Age  SibSp  \textbackslash{}
+          0                              Braund, Mr. Owen Harris    male  22.0      1   
+          1    Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.0      1   
+          2                               Heikkinen, Miss. Laina  female  26.0      0   
+          3         Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+          4                             Allen, Mr. William Henry    male  35.0      0   
+          6                              McCarthy, Mr. Timothy J    male  54.0      0   
+          7                       Palsson, Master. Gosta Leonard    male   2.0      3   
+          8    Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)  female  27.0      0   
+          9                  Nasser, Mrs. Nicholas (Adele Achem)  female  14.0      1   
+          10                     Sandstrom, Miss. Marguerite Rut  female   4.0      1   
+          11                            Bonnell, Miss. Elizabeth  female  58.0      0   
+          12                      Saundercock, Mr. William Henry    male  20.0      0   
+          13                         Andersson, Mr. Anders Johan    male  39.0      1   
+          14                Vestrom, Miss. Hulda Amanda Adolfina  female  14.0      0   
+          15                    Hewlett, Mrs. (Mary D Kingcome)   female  55.0      0   
+          16                                Rice, Master. Eugene    male   2.0      4   
+          18   Vander Planke, Mrs. Julius (Emelia Maria Vande{\ldots}  female  31.0      1   
+          20                                Fynney, Mr. Joseph J    male  35.0      0   
+          21                               Beesley, Mr. Lawrence    male  34.0      0   
+          22                         McGowan, Miss. Anna "Annie"  female  15.0      0   
+          23                        Sloper, Mr. William Thompson    male  28.0      0   
+          24                       Palsson, Miss. Torborg Danira  female   8.0      3   
+          25   Asplund, Mrs. Carl Oscar (Selma Augusta Emilia{\ldots}  female  38.0      1   
+          27                      Fortune, Mr. Charles Alexander    male  19.0      3   
+          30                            Uruchurtu, Don. Manuel E    male  40.0      0   
+          33                               Wheadon, Mr. Edward H    male  66.0      0   
+          34                             Meyer, Mr. Edgar Joseph    male  28.0      1   
+          35                      Holverson, Mr. Alexander Oskar    male  42.0      1   
+          37                            Cann, Mr. Ernest Charles    male  21.0      0   
+          38                  Vander Planke, Miss. Augusta Maria  female  18.0      2   
+          ..                                                 {\ldots}     {\ldots}   {\ldots}    {\ldots}   
+          856         Wick, Mrs. George Dennick (Mary Hitchcock)  female  45.0      1   
+          857                             Daly, Mr. Peter Denis     male  51.0      0   
+          858              Baclini, Mrs. Solomon (Latifa Qurban)  female  24.0      0   
+          860                            Hansen, Mr. Claus Peter    male  41.0      2   
+          861                        Giles, Mr. Frederick Edward    male  21.0      1   
+          862  Swift, Mrs. Frederick Joel (Margaret Welles Ba{\ldots}  female  48.0      0   
+          864                             Gill, Mr. John William    male  24.0      0   
+          865                           Bystrom, Mrs. (Karolina)  female  42.0      0   
+          866                       Duran y More, Miss. Asuncion  female  27.0      1   
+          867               Roebling, Mr. Washington Augustus II    male  31.0      0   
+          869                    Johnson, Master. Harold Theodor    male   4.0      1   
+          870                                  Balkic, Mr. Cerin    male  26.0      0   
+          871   Beckwith, Mrs. Richard Leonard (Sallie Monypeny)  female  47.0      1   
+          872                           Carlsson, Mr. Frans Olof    male  33.0      0   
+          873                        Vander Cruyssen, Mr. Victor    male  47.0      0   
+          874              Abelson, Mrs. Samuel (Hannah Wizosky)  female  28.0      1   
+          875                   Najib, Miss. Adele Kiamie "Jane"  female  15.0      0   
+          876                      Gustafsson, Mr. Alfred Ossian    male  20.0      0   
+          877                               Petroff, Mr. Nedelio    male  19.0      0   
+          879      Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)  female  56.0      0   
+          880       Shelley, Mrs. William (Imanita Parrish Hall)  female  25.0      0   
+          881                                 Markun, Mr. Johann    male  33.0      0   
+          882                       Dahlberg, Miss. Gerda Ulrika  female  22.0      0   
+          883                      Banfield, Mr. Frederick James    male  28.0      0   
+          884                             Sutehall, Mr. Henry Jr    male  25.0      0   
+          885               Rice, Mrs. William (Margaret Norton)  female  39.0      0   
+          886                              Montvila, Rev. Juozas    male  27.0      0   
+          887                       Graham, Miss. Margaret Edith  female  19.0      0   
+          889                              Behr, Mr. Karl Howell    male  26.0      0   
+          890                                Dooley, Mr. Patrick    male  32.0      0   
+          
+               Parch            Ticket      Fare        Cabin Embarked  
+          0        0         A/5 21171    7.2500          NaN        S  
+          1        0          PC 17599   71.2833          C85        C  
+          2        0  STON/O2. 3101282    7.9250          NaN        S  
+          3        0            113803   53.1000         C123        S  
+          4        0            373450    8.0500          NaN        S  
+          6        0             17463   51.8625          E46        S  
+          7        1            349909   21.0750          NaN        S  
+          8        2            347742   11.1333          NaN        S  
+          9        0            237736   30.0708          NaN        C  
+          10       1           PP 9549   16.7000           G6        S  
+          11       0            113783   26.5500         C103        S  
+          12       0         A/5. 2151    8.0500          NaN        S  
+          13       5            347082   31.2750          NaN        S  
+          14       0            350406    7.8542          NaN        S  
+          15       0            248706   16.0000          NaN        S  
+          16       1            382652   29.1250          NaN        Q  
+          18       0            345763   18.0000          NaN        S  
+          20       0            239865   26.0000          NaN        S  
+          21       0            248698   13.0000          D56        S  
+          22       0            330923    8.0292          NaN        Q  
+          23       0            113788   35.5000           A6        S  
+          24       1            349909   21.0750          NaN        S  
+          25       5            347077   31.3875          NaN        S  
+          27       2             19950  263.0000  C23 C25 C27        S  
+          30       0          PC 17601   27.7208          NaN        C  
+          33       0        C.A. 24579   10.5000          NaN        S  
+          34       0          PC 17604   82.1708          NaN        C  
+          35       0            113789   52.0000          NaN        S  
+          37       0        A./5. 2152    8.0500          NaN        S  
+          38       0            345764   18.0000          NaN        S  
+          ..     {\ldots}               {\ldots}       {\ldots}          {\ldots}      {\ldots}  
+          856      1             36928  164.8667          NaN        S  
+          857      0            113055   26.5500          E17        S  
+          858      3              2666   19.2583          NaN        C  
+          860      0            350026   14.1083          NaN        S  
+          861      0             28134   11.5000          NaN        S  
+          862      0             17466   25.9292          D17        S  
+          864      0            233866   13.0000          NaN        S  
+          865      0            236852   13.0000          NaN        S  
+          866      0     SC/PARIS 2149   13.8583          NaN        C  
+          867      0          PC 17590   50.4958          A24        S  
+          869      1            347742   11.1333          NaN        S  
+          870      0            349248    7.8958          NaN        S  
+          871      1             11751   52.5542          D35        S  
+          872      0               695    5.0000  B51 B53 B55        S  
+          873      0            345765    9.0000          NaN        S  
+          874      0         P/PP 3381   24.0000          NaN        C  
+          875      0              2667    7.2250          NaN        C  
+          876      0              7534    9.8458          NaN        S  
+          877      0            349212    7.8958          NaN        S  
+          879      1             11767   83.1583          C50        C  
+          880      1            230433   26.0000          NaN        S  
+          881      0            349257    7.8958          NaN        S  
+          882      0              7552   10.5167          NaN        S  
+          883      0  C.A./SOTON 34068   10.5000          NaN        S  
+          884      0   SOTON/OQ 392076    7.0500          NaN        S  
+          885      5            382652   29.1250          NaN        Q  
+          886      0            211536   13.0000          NaN        S  
+          887      0            112053   30.0000          B42        S  
+          889      0            111369   30.0000         C148        C  
+          890      0            370376    7.7500          NaN        Q  
+          
+          [714 rows x 12 columns]
+\end{Verbatim}
+            
+    
+    \begin{verbatim}
+<matplotlib.figure.Figure at 0x266fb131b70>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{filtered}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:}                  PassengerId  Name  Sex  Age  SibSp  Parch  Ticket  Fare  \textbackslash{}
+          Pclass Survived                                                            
+          1      0                  80    80   80   64     80     80      80    80   
+                 1                 136   136  136  122    136    136     136   136   
+          2      0                  97    97   97   90     97     97      97    97   
+                 1                  87    87   87   83     87     87      87    87   
+          3      0                 372   372  372  270    372    372     372   372   
+                 1                 119   119  119   85    119    119     119   119   
+          
+                           Cabin  Embarked  
+          Pclass Survived                   
+          1      0            59        80  
+                 1           117       134  
+          2      0             3        97  
+                 1            13        87  
+          3      0             6       372  
+                 1             6       119  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}156}]:}          PassengerId      Name       Sex       Age      SibSp      Parch       \textbackslash{}
+          Survived           0    1    0    1    0    1    0    1     0    1     0    1   
+          Pclass                                                                          
+          1                 80  136   80  136   80  136   64  122    80  136    80  136   
+          2                 97   87   97   87   97   87   90   83    97   87    97   87   
+          3                372  119  372  119  372  119  270   85   372  119   372  119   
+          
+                   Ticket      Fare      Cabin      Embarked       
+          Survived      0    1    0    1     0    1        0    1  
+          Pclass                                                   
+          1            80  136   80  136    59  117       80  134  
+          2            97   87   97   87     3   13       97   87  
+          3           372  119  372  119     6    6      372  119  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PassengerId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}157}]:} Survived    0    1
+          Pclass            
+          1          80  136
+          2          97   87
+          3         372  119
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PassengerId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{stacked}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

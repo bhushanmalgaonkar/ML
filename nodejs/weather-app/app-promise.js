@@ -22,6 +22,8 @@ var apikey = JSON.parse(fs.readFileSync('apikey', 'utf8'));
 
 var geocodeURI = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${apikey['maps']}`;
 axios.get(geocodeURI).then((response) => {
+    if (response.data.status !== 'OK')
+        throw new Error(response.data.error_message);
     if (response.data.stats == 'ZERO_RESULTS')
         throw new Error('Couldn\'t find the address');
     
